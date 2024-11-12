@@ -1,0 +1,25 @@
+class Solution:
+    def maximumBeauty(self, items: List[List[int]], queries: List[int]) -> List[int]:
+        # Step 1: Sort the items by price
+        items.sort()  # Sort first by price, and if prices are equal, by beauty
+        
+        # Step 2: Prepare a list of max beauties for each price point
+        max_beauties = []
+        current_max = 0
+        for price, beauty in items:
+            current_max = max(current_max, beauty)
+            max_beauties.append([price, current_max])
+        
+        # Step 3: For each query, manually find the maximum beauty
+        result = []
+        for query in queries:
+            # Iterate through the sorted max_beauties list to find the appropriate beauty
+            max_beauty_for_query = 0
+            for price, beauty in max_beauties:
+                if price <= query:
+                    max_beauty_for_query = beauty
+                else:
+                    break  # No need to check further, since items are sorted by price
+            result.append(max_beauty_for_query)
+        
+        return result
