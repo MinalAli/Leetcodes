@@ -1,0 +1,15 @@
+class Solution:
+    def resultsArray(self, nums: List[int], k: int) -> List[int]:
+        result = []
+        
+        # Iterate over the possible starting indices for subarrays of size k
+        for i in range(len(nums) - k + 1):
+            subarray = nums[i:i + k]
+            
+            # Check if the subarray has distinct elements and is strictly consecutive and sorted
+            if len(subarray) == len(set(subarray)) and max(subarray) - min(subarray) == k - 1 and subarray == sorted(subarray):
+                result.append(max(subarray))  # Maximum element of the subarray
+            else:
+                result.append(-1)  # Invalid subarray
+        
+        return result
