@@ -1,0 +1,12 @@
+class Solution:
+    def findClosestNumber(self, nums: List[int]) -> int:
+        closet = nums[0]
+
+        for i in nums:
+            if abs(i) < abs(closet):
+                closet = i
+        
+        if closet < 0 and abs(closet) in nums:
+            return abs(closet)
+        else:
+            return closet
