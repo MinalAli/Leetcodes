@@ -1,0 +1,12 @@
+from collections import Counter
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # Count frequency of characters in both strings
+        s_count = Counter(s)
+        t_count = Counter(t)
+        
+        # Find the extra character in t
+        for char in t_count:
+            if t_count[char] != s_count.get(char, 0):
+                return char
