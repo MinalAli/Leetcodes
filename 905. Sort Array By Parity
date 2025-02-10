@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        # Two-pointer approach
+        left, right = 0, len(nums) - 1
+
+        while left < right:
+            # Move left pointer if it's already even
+            while left < right and nums[left] % 2 == 0:
+                left += 1
+            # Move right pointer if it's already odd
+            while left < right and nums[right] % 2 == 1:
+                right -= 1
+
+            # Swap odd from left with even from right
+            nums[left], nums[right] = nums[right], nums[left]
+        
+        return nums
