@@ -1,0 +1,24 @@
+from typing import List
+
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        n = len(nums)
+        rotation_point = -1
+        
+        # Find the point where the order breaks
+        for i in range(1, n):
+            if nums[i] < nums[i - 1]:  
+                rotation_point = i
+                break  
+        
+        # If no break is found, the array is already sorted (valid rotation with 0 shifts)
+        if rotation_point == -1:
+            return True  
+        
+        # Check if the remaining part is sorted
+        for i in range(rotation_point + 1, n):
+            if nums[i] < nums[i - 1]:  
+                return False  
+        
+        # Check if the last element is less than the first (which would break rotation order)
+        return nums[n - 1] <= nums[0]
