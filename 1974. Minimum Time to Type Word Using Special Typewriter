@@ -1,0 +1,18 @@
+class Solution:
+    def minTimeToType(self, word: str) -> int:
+        time = 0
+        pointer = 'a'  # Initial position of the pointer
+        
+        for char in word:
+            # Calculate clockwise and counterclockwise distance
+            clockwise = (ord(char) - ord(pointer)) % 26
+            counterclockwise = (ord(pointer) - ord(char)) % 26
+            
+            # Move in the minimum direction and type the character
+            time += min(clockwise, counterclockwise) + 1
+            pointer = char  # Update pointer position
+        
+        return time
+    
+    # Time Complexity: O(n) - We iterate through the word once.
+    # Space Complexity: O(1) - Only a few integer variables are used.
