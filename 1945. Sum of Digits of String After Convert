@@ -1,0 +1,23 @@
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        # Convert string to integer representation
+        num_str = ""
+        for char in s:
+            num_str += str(ord(char) - ord('a') + 1)  # Convert letter to its position in the alphabet
+        
+        # Transform the integer k times
+        num = 0
+        for digit in num_str:
+            num += int(digit)
+        
+        for _ in range(k - 1):
+            temp = 0
+            while num > 0:
+                temp += num % 10  # Sum the digits
+                num //= 10
+            num = temp
+        
+        return num
+    
+    # Time Complexity: O(n + k * m) - Converting the string takes O(n), summing digits k times takes O(k * m) where m is the number of digits.
+    # Space Complexity: O(1) - Only a few integer variables are used.
