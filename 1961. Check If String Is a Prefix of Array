@@ -1,0 +1,17 @@
+class Solution:
+    def isPrefixString(self, s: str, words: list[str]) -> bool:
+        prefix = ""
+        
+        for word in words:
+            prefix += word  # Manually concatenate strings
+            
+            if prefix == s:
+                return True
+            
+            if len(prefix) > len(s):  # Stop early if prefix exceeds s
+                return False
+        
+        return False
+    
+    # Time Complexity: O(n) - We iterate through words and build the prefix up to length of s.
+    # Space Complexity: O(1) - Only a few variables are used (not counting input storage).
