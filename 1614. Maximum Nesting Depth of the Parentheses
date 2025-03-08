@@ -1,0 +1,19 @@
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        max_depth = 0
+        depth = 0
+        
+        for char in s:
+            if char == '(':
+                depth += 1  # Increase depth for opening parenthesis
+                max_depth = max(max_depth, depth)  # Update max depth
+            elif char == ')':
+                depth -= 1  # Decrease depth for closing parenthesis
+        
+        return max_depth
+
+# Example test cases
+sol = Solution()
+print(sol.maxDepth("(1+(2*3)+((8)/4))+1"))  # Output: 3
+print(sol.maxDepth("(1)+((2))+(((3)))"))    # Output: 3
+print(sol.maxDepth("()(())((()()))"))       # Output: 3
