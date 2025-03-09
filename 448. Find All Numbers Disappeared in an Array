@@ -1,0 +1,17 @@
+from typing import List
+
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        """
+        Returns an array of all numbers in the range [1, n] that do not appear in nums.
+        """
+        n = len(nums)
+        
+        # Mark visited indices by negating values at corresponding positions
+        for num in nums:
+            index = num - 1 if num > 0 else -num - 1  # Convert value to index (1-based to 0-based)
+            if nums[index] > 0:
+                nums[index] = -nums[index]  # Mark as visited by making it negative
+        
+        # Collect all indices that remain positive (i.e., missing numbers)
+        return [i + 1 for i in range(n) if nums[i] > 0]
