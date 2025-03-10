@@ -1,0 +1,13 @@
+from typing import List
+
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        # Dictionary to store the last index where each number appeared
+        num_index = {}
+
+        for i, num in enumerate(nums):
+            if num in num_index and abs(i - num_index[num]) <= k:
+                return True  # Found a duplicate within k distance
+            num_index[num] = i  # Update the latest index of num
+        
+        return False  # No nearby duplicates found
