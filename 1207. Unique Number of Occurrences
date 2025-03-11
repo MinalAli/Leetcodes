@@ -1,0 +1,8 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        result = {}
+
+        for i in arr:
+            result[i] = result.get(i , 0) + 1
+
+        return len(result.values()) == len(set(result.values()))
