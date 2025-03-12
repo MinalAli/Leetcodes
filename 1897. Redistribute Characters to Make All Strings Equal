@@ -1,0 +1,15 @@
+from collections import Counter
+from typing import List
+
+class Solution:
+    def makeEqual(self, words: List[str]) -> bool:
+        # Step 1: Count the frequency of all characters across all words
+        total_count = Counter("".join(words))
+        n = len(words)  # Number of words
+        
+        # Step 2: Check if each character's count is divisible by n
+        for count in total_count.values():
+            if count % n != 0:
+                return False  # If any character is not evenly distributable, return False
+        
+        return True  # If all characters are evenly distributable, return True
