@@ -1,0 +1,36 @@
+from typing import List
+
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        # Step 1: Create a frequency dictionary for characters in chars
+        char_count = {}  # Dictionary to store character counts
+        for char in chars:
+            if char in char_count:
+                char_count[char] += 1
+            else:
+                char_count[char] = 1
+        
+        total_length = 0  # This will store the sum of lengths of valid words
+
+        # Step 2: Check each word in words
+        for word in words:
+            word_count = {}  # Dictionary to count letters in the word
+            for char in word:
+                if char in word_count:
+                    word_count[char] += 1
+                else:
+                    word_count[char] = 1
+
+            # Step 3: Check if the word can be formed using chars
+            can_form = True  # Assume word is valid initially
+            for char in word_count:
+                if char not in char_count or word_count[char] > char_count[char]:
+                    can_form = False  # If we don't have enough characters, word is invalid
+                    break  # Stop checking this word further
+            
+            # Step 4: If word is valid, add its length to total_length
+            if can_form:
+                total_length += len(word)
+
+        # Step 5: Return the total length of all valid words
+        return total_length
