@@ -1,0 +1,15 @@
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        outgoing_cities = set()
+
+        for i, j in paths:
+            outgoing_cities.add(i)
+
+        for i,j in paths:
+            if j not in outgoing_cities:
+                return j
+
+        
+#Extract all starting cities: These are the first elements of each pair.
+#Extract all destination cities: These are the second elements of each pair.
+#Find the destination city: The city that appears only in the destination list but never in the starting list is our answer.
