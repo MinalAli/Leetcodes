@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def decompressRLElist(self, nums: List[int]) -> List[int]:
+        # Step 1: Initialize an empty list to store decompressed values
+        result = []
+        
+        # Step 2: Loop through nums in steps of 2 to get [freq, val] pairs
+        for i in range(0, len(nums), 2):
+            freq = nums[i]      # Get frequency
+            val = nums[i + 1]   # Get value
+            
+            # Step 3: Append 'val' to result 'freq' times
+            for _ in range(freq):
+                result.append(val)
+        
+        # Step 4: Return the final decompressed list
+        return result
