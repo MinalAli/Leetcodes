@@ -1,0 +1,15 @@
+from typing import List
+
+class Solution:
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        stack = []  # Stores indices of items waiting for a discount
+        
+        for i in range(len(prices)):
+            # Apply discount if a smaller or equal price is found
+            while stack and prices[stack[-1]] >= prices[i]:
+                index = stack.pop()  # Get last stored index
+                prices[index] -= prices[i]  # Apply discount
+            
+            stack.append(i)  # Store index for future discounts
+        
+        return prices
