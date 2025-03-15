@@ -1,0 +1,18 @@
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
+        stack = []
+        
+        for char in s:
+            if char == ')':
+                # Pop characters until we find '('
+                temp = []
+                while stack and stack[-1] != '(':
+                    temp.append(stack.pop())
+                stack.pop()  # Remove '(' from stack
+                
+                # Add reversed substring back to stack
+                stack.extend(temp)
+            else:
+                stack.append(char)
+        
+        return "".join(stack)
