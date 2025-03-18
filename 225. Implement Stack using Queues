@@ -1,0 +1,24 @@
+class MyStack:
+    def __init__(self):
+        self.q1 = deque()  # Main queue to store stack elements
+        self.q2 = deque()  # Helper queue
+
+    def push(self, x: int) -> None:
+        # Step 1: Add new element to q2
+        self.q2.append(x)
+
+        # Step 2: Move all elements from q1 to q2
+        while self.q1:
+            self.q2.append(self.q1.popleft())
+
+        # Step 3: Swap q1 and q2
+        self.q1, self.q2 = self.q2, self.q1  # Now q1 has the elements in LIFO order
+
+    def pop(self) -> int:
+        return self.q1.popleft() if self.q1 else None  # Removes and returns top element
+
+    def top(self) -> int:
+        return self.q1[0] if self.q1 else None  # Returns top element without removing it
+
+    def empty(self) -> bool:
+        return len(self.q1) == 0  # Returns True if stack is empty
