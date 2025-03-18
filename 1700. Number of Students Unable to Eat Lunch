@@ -1,0 +1,17 @@
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+     students = deque(students)
+     sandwiches = deque(sandwiches)
+    
+     attempts = 0  # Track how many times students fail to take a sandwich
+
+     while students and attempts < len(students):  
+         if students[0] == sandwiches[0]:
+            students.popleft()  # Student eats the sandwich
+            sandwiches.popleft()
+            attempts = 0  # Reset attempts because a sandwich was taken
+         else:
+            students.append(students.popleft())  # Move student to the end
+            attempts += 1  # Increase failed attempts
+
+     return len(students)  # Students who couldn't eat       
