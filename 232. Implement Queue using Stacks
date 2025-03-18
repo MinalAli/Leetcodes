@@ -1,0 +1,27 @@
+class MyQueue:
+    def __init__(self):
+        """Initialize two stacks"""
+        self.stack1 = []  # For pushing elements
+        self.stack2 = []  # For reversing order (for pop and peek operations)
+
+    def push(self, x: int) -> None:
+        #Push element x to the back of the queue (stack1)
+        self.stack1.append(x)
+
+    def pop(self) -> int:
+        #Removes the front element of the queue and returns it (from stack 2)
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())  # Reverse stack1 into stack2
+        return self.stack2.pop() if self.stack2 else None
+
+    def peek(self) -> int:
+        #Returns the front element of the queue without removing it
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())  # Reverse stack1 into stack2
+        return self.stack2[-1] if self.stack2 else None
+
+    def empty(self) -> bool:
+       #Returns true if the queue is empty, otherwise false
+        return not self.stack1 and not self.stack2
