@@ -1,0 +1,28 @@
+from collections import deque
+
+class Solution:
+    def predictPartyVictory(self, senate: str) -> str:
+        radiant_queue = deque()
+        dire_queue = deque()
+        
+        # Store indexes of R and D senators
+        n = len(senate)
+        for i, s in enumerate(senate):
+            if s == 'R':
+                radiant_queue.append(i)
+            else:
+                dire_queue.append(i)
+        
+        # Process banning
+        while radiant_queue and dire_queue:
+            r_index = radiant_queue.popleft()
+            d_index = dire_queue.popleft()
+            
+            # The senator with the smaller index bans the other
+            if r_index < d_index:
+                radiant_queue.append(r_index + n)  # Move R to the back
+            else:
+                dire_queue.append(d_index + n)  # Move D to the back
+        
+        # If radiant_queue is empty, Dire wins; otherwise, Radiant wins
+        return "Radiant" if radiant_queue else "Dire"
