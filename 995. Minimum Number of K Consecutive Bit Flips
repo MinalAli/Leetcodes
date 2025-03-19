@@ -1,0 +1,21 @@
+class Solution:
+    def minKBitFlips(self, nums: List[int], k: int) -> int:
+        queue = deque()  # Stores end positions of flips
+        flips = 0  # Count total flips
+        
+        for i in range(len(nums)):
+            # Remove expired flips from the queue
+            if queue and queue[0] == i:
+                queue.popleft()
+
+            # Check if the current bit needs flipping
+            if (len(queue) % 2 == nums[i]):  
+                # If we don't have k elements left, return -1
+                if i + k > len(nums):
+                    return -1
+                
+                # Flip and mark the end of this flip operation
+                queue.append(i + k)
+                flips += 1  # Increment flip count
+        
+        return flips
