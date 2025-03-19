@@ -1,0 +1,25 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+        # Step 1: Sort the deck in increasing order
+        deck.sort()
+
+        # Step 2: Create a queue of indices [0,1,2,...,n-1]
+        n = len(deck)
+        queue = deque(range(n))
+
+        # Step 3: Prepare the result array
+        result = [0] * n
+
+        # Step 4: Simulate the process
+        for card in deck:
+            # Place the smallest available card at the first available position
+            result[queue.popleft()] = card
+            
+            # Move the next index to the back of the queue (if any remain)
+            if queue:
+                queue.append(queue.popleft())
+
+        return result
