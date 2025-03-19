@@ -1,0 +1,27 @@
+from typing import List
+
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        count = 0
+        left = -1    # Marks the last index where nums[i] is out of range
+        minPos = -1  # Last seen index of minK
+        maxPos = -1  # Last seen index of maxK
+
+        for right in range(len(nums)):
+            # If nums[right] is out of bounds, reset the window
+            if nums[right] < minK or nums[right] > maxK:
+                left = right
+                minPos = -1
+                maxPos = -1
+            
+            # Update positions of minK and maxK
+            if nums[right] == minK:
+                minPos = right
+            if nums[right] == maxK:
+                maxPos = right
+
+            # Count valid subarrays only when both minPos and maxPos exist
+            if minPos != -1 and maxPos != -1:
+                count += max(0, min(minPos, maxPos) - left)
+
+        return count
