@@ -19,11 +19,16 @@ class Solution:
                 d2[ch] = 1
         
 
-        if d1.keys() != d2.keys():
+        # if d1.keys() != d2.keys():
+        #     return False
+
+        # for letter in d1.keys():
+        #     if d1[letter] != d2[letter]:
+        #         return False
+
+        # return True
+
+        if d1 == d2:
+            return True
+        else:
             return False
-
-        for letter in d1.keys():
-            if d1[letter] != d2[letter]:
-                return False
-
-        return True
